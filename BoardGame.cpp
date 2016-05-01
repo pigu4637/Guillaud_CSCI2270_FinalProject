@@ -2,9 +2,12 @@
 #include <iostream>
 using namespace std;
 
+//small structure to keep track of whether or not the board is full. (Not the greatest implementation)
 BoardGame::BoardGame()
 {
     root = new BoardElem(0,0);
+    b = new bCounter();
+
 }
 
 BoardGame::~BoardGame(){}
@@ -277,4 +280,36 @@ bool BoardGame::checkBoard(BoardElem *node, int turn)
     }
 
     return 0;
+}
+
+/*
+A message from Casey Cooter
+As near as I can tell, you kind of worked yourself into a corner in terms of checking if the board is full.
+You would have to check the linked list to see if it was full which is a pain.
+So, instead, I created a structure that holds an array and a value called bcounter in the header. I then modified main.cpp in order to include a condition checking if the full bool in this structure was true or false.
+Now, there's probably a little more fluidity to be added to just continually loop the program, but I think it's a good start.
+
+Basically, it uses a small array of 7 locs. It works by creating a temp value full, and assuming it is true. It then loops through the array, checking if a column has less than 6 elements in it. If it does, it sets the
+temporary condition to false, exits the loop, and doesn't change the structure variable. If it is technically full, it will not change the temp value to false, reach the end, and change the variable to true.
+Then, when main.cpp detects that this class variable is true for full, it will skip to the end, and suggest that the user starts a new game.
+
+I want to emphasize I don't know if this is the best solution - Linked Lists may not have been the superb solution for this (or perhaps I'm just struggling to understand it)
+
+However, I think this is a good enough solution, and should work well enough for the way you have this implemented. Enjoy!
+*/
+void BoardGame::increment(int column)
+{
+    b->col[column - 1] = b->col[column - 1] + 1;
+    bool full = true; //assume true
+    for(int i =0; i < 7; i++)
+    {
+        if(b->col[i] < 6){
+            full = false;
+            break;
+        }
+    }
+    if (full == true)
+    {
+        b->full = true;
+    }
 }
