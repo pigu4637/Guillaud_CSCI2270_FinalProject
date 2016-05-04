@@ -13,5 +13,5 @@ In order to run, please download "main.cpp", "BoardGame.h" and "BoardGame.cpp". 
 There is no external libraries, all of those used should already be included. The project should be able to run on any system.
 
 Issues:
-- If board is full, the game will be stuck.
-- If inputting non-numbers in the column selector, the game will crash.
+- If board is full, the game will be stuck. FIXED
+- If inputting non-numbers in the column selector, the game will crash. FIXED
