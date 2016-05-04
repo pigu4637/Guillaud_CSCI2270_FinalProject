@@ -5,6 +5,18 @@
 
 // This project uses a grid of linked lists, each node linked
 // to its adjacent and top and bottom
+struct bCounter
+{
+    int col[7];
+    bool full;
+    bCounter()
+    {
+        for(int i = 0; i < 7;i++)
+            col[i] = 0;
+        full = false;
+    }
+};
+
 struct BoardElem
 {
     int status;
@@ -43,6 +55,9 @@ public:
     int turn;
     bool won;
     bool checkBoard(BoardElem *node, int turn);
+    void increment(int column);
+
+    bCounter * b;
 private:
     BoardElem *root;
 };
